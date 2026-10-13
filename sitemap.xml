@@ -121,14 +121,20 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.mangiabrickovenpizza.com/2-for-40-toms-river</loc>
+    <loc>https://www.mangiabrickovenpizza.com/2-for-49-toms-river</loc>
     <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.mangiabrickovenpizza.com/2-for-40-jackson</loc>
+    <loc>https://www.mangiabrickovenpizza.com/2-for-49-jackson</loc>
     <lastmod>2026-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.mangiabrickovenpizza.com/2-for-49-shrewsbury</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

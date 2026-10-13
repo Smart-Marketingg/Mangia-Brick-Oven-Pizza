@@ -43,7 +43,8 @@
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
+n.queue=[];if(/claudeusercontent|localhost|127\.0\.0\.1/.test(f.location.hostname))return;
+t=b.createElement(e);t.async=!0;t.onerror=function(){};
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
@@ -54,15 +55,6 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=214535598226406&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4BFD2Y01D4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-4BFD2Y01D4');
-</script>
 
 <script src="./support.js"></script>
 </head>
@@ -248,7 +240,7 @@ p,li{text-wrap:pretty}
             <div style="position:relative" data-reveal="off">
               <div style="position:relative;border-radius:22px;overflow:hidden;border:3px solid #1A1411;box-shadow:0 28px 56px -26px rgba(60,30,10,.55);aspect-ratio:4/5;background:#1A1411">
                 <sc-if value="{{ sec.hasSlider }}">
-                  <img src="{{ heroActiveSrc }}" alt="{{ heroActiveAlt }}" key="{{ heroActiveSrc }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;animation:fadeImg .8s ease"/>
+                  <img loading="lazy" src="{{ heroActiveSrc }}" alt="{{ heroActiveAlt }}" key="{{ heroActiveSrc }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;animation:fadeImg .8s ease"/>
                   <div style="position:absolute;left:0;right:0;bottom:14px;z-index:5;display:flex;gap:8px;justify-content:center">
                     <sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="5">
                       <button onClick="{{ d.onClick }}" aria-label="View interior photo" style="width:9px;height:9px;border-radius:50%;border:none;cursor:pointer;padding:0;background:{{ d.bg }};box-shadow:0 1px 3px rgba(0,0,0,.5);transition:background .25s"></button>
@@ -256,7 +248,7 @@ p,li{text-wrap:pretty}
                   </div>
                 </sc-if>
                 <sc-if value="{{ sec.singleImg }}">
-                  <img src="{{ sec.img }}" alt="{{ sec.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"/>
+                  <img loading="lazy" src="{{ sec.img }}" alt="{{ sec.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"/>
                 </sc-if>
               </div>
               <div style="position:absolute;top:-18px;right:-14px;background:#A50000;color:#FFFCF8;font-family:Caveat;font-weight:700;font-size:24px;padding:8px 18px;border-radius:14px;transform:rotate(6deg);box-shadow:0 12px 24px -12px rgba(165,0,0,.7);z-index:6">fresh from the oven!</div>
@@ -285,7 +277,7 @@ p,li{text-wrap:pretty}
       <!-- HERO IMAGE (events / offers) -->
       <sc-if value="{{ sec.is_heroImage }}">
         <section style="position:relative;padding:96px 24px;background:#1A1411;color:#FFFCF8;overflow:hidden">
-          <img src="{{ sec.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4"/>
+          <img loading="lazy" src="{{ sec.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4"/>
           <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,16,12,.88),rgba(20,16,12,.5))"></div>
           <div style="position:relative;max-width:1320px;margin:0 auto" data-reveal="off">
             <div style="font-family:Archivo;font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#E8B4B4;margin-bottom:14px">{{ sec.eyebrow }}</div>
@@ -314,7 +306,7 @@ p,li{text-wrap:pretty}
               <sc-for list="{{ sec.items }}" as="loc" hint-placeholder-count="3">
                 <div data-reveal="off" style="background:#FFFCF8;border:2px solid #1A1411;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 40px -26px rgba(60,30,10,.45);transition:transform .25s" style-hover="transform:translateY(-6px)">
                   <div style="position:relative;aspect-ratio:3/2;overflow:hidden">
-                    <img src="{{ loc.img }}" alt="{{ loc.name }}" style="width:100%;height:100%;object-fit:cover;object-position:{{ loc.objPos }};display:block;transition:transform .5s" style-hover="transform:scale(1.06)"/>
+                    <img loading="lazy" src="{{ loc.img }}" alt="{{ loc.name }}" style="width:100%;height:100%;object-fit:cover;object-position:{{ loc.objPos }};display:block;transition:transform .5s" style-hover="transform:scale(1.06)"/>
                     <span style="position:absolute;top:12px;left:12px;background:#A50000;color:#FFFCF8;font-family:Archivo;font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:999px">{{ loc.promo }}</span>
                   </div>
                   <div style="padding:22px;display:flex;flex-direction:column;flex:1">
@@ -343,12 +335,12 @@ p,li{text-wrap:pretty}
             <div style="position:relative" data-reveal="off">
               <sc-if value="{{ sec.fullImg }}">
                 <div style="border-radius:20px;overflow:hidden;border:3px solid #1A1411;box-shadow:0 26px 54px -28px rgba(60,30,10,.5)">
-                  <img src="{{ sec.img }}" alt="{{ sec.title }}" style="width:100%;height:auto;display:block"/>
+                  <img loading="lazy" src="{{ sec.img }}" alt="{{ sec.title }}" style="width:100%;height:auto;display:block"/>
                 </div>
               </sc-if>
               <sc-if value="{{ sec.notFullImg }}">
                 <div style="border-radius:20px;overflow:hidden;border:3px solid #1A1411;box-shadow:0 26px 54px -28px rgba(60,30,10,.5);aspect-ratio:5/4">
-                  <img src="{{ sec.img }}" alt="{{ sec.title }}" style="width:100%;height:100%;object-fit:cover;object-position:{{ sec.imgPos }};display:block"/>
+                  <img loading="lazy" src="{{ sec.img }}" alt="{{ sec.title }}" style="width:100%;height:100%;object-fit:cover;object-position:{{ sec.imgPos }};display:block"/>
                 </div>
               </sc-if>
               <div style="position:absolute;-bottom:0;bottom:-20px;right:-16px;background:#A50000;color:#FFFCF8;width:96px;height:96px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(-8deg);border:2px dashed rgba(255,252,248,.7)"><span style="font-family:Anton;font-size:26px;line-height:1">~50</span><span style="font-family:Archivo;font-weight:800;font-size:9px;letter-spacing:.08em;text-transform:uppercase">Years</span></div>
@@ -389,7 +381,7 @@ p,li{text-wrap:pretty}
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px" class="cards-4">
               <sc-for list="{{ sec.items }}" as="f" hint-placeholder-count="8">
                 <div data-reveal="off" style="background:#FFFCF8;border-radius:16px;overflow:hidden;color:#1A1411;box-shadow:0 16px 32px -20px rgba(0,0,0,.6);transition:transform .25s" style-hover="transform:translateY(-6px)">
-                  <div style="aspect-ratio:1/1;overflow:hidden"><img src="{{ f.img }}" alt="{{ f.title }}" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s" style-hover="transform:scale(1.07)"/></div>
+                  <div style="aspect-ratio:1/1;overflow:hidden"><img loading="lazy" src="{{ f.img }}" alt="{{ f.title }}" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s" style-hover="transform:scale(1.07)"/></div>
                   <div style="padding:16px 16px 18px">
                     <h3 style="font-family:Archivo;font-weight:900;font-size:17px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 5px">{{ f.title }}</h3>
                     <p style="margin:0;font-size:13.5px;color:#6B5F52;line-height:1.45">{{ f.note }}</p>
@@ -415,7 +407,7 @@ p,li{text-wrap:pretty}
                 </sc-for>
               </div>
             </div>
-            <div class="sig-img" style="min-height:380px;position:relative"><img src="{{ sec.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:80% 48%"/></div>
+            <div class="sig-img" style="min-height:380px;position:relative"><img loading="lazy" src="{{ sec.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:80% 48%"/></div>
           </div>
         </section>
       </sc-if>
@@ -481,7 +473,7 @@ p,li{text-wrap:pretty}
             <sc-if value="{{ sec.single }}">
               <div data-reveal="off" style="background:#FFFCF8;border:2px solid #1A1411;border-radius:22px;overflow:hidden;display:grid;grid-template-columns:1.05fr 1fr;box-shadow:0 22px 50px -28px rgba(60,30,10,.5)" class="event-banner">
                 <sc-for list="{{ sec.items }}" as="e" hint-placeholder-count="1">
-                  <div style="position:relative;min-height:340px"><img src="{{ e.img }}" alt="{{ e.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/></div>
+                  <div style="position:relative;min-height:340px"><img loading="lazy" src="{{ e.img }}" alt="{{ e.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/></div>
                   <div style="padding:46px 44px;display:flex;flex-direction:column;justify-content:center">
                     <h3 style="font-family:Anton;font-weight:400;font-size:clamp(30px,3.4vw,44px);text-transform:uppercase;line-height:.96;margin:0 0 8px">{{ e.name }}</h3>
                     <div style="font-family:Archivo;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#A50000;margin-bottom:16px">{{ e.capacity }}</div>
@@ -500,7 +492,7 @@ p,li{text-wrap:pretty}
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px" class="cards-3">
               <sc-for list="{{ sec.items }}" as="e" hint-placeholder-count="3">
                 <div data-reveal="off" style="background:#FFFCF8;border:2px solid #1A1411;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 40px -26px rgba(60,30,10,.45);transition:transform .25s" style-hover="transform:translateY(-6px)">
-                  <div style="aspect-ratio:3/2;overflow:hidden"><img src="{{ e.img }}" alt="{{ e.name }}" style="width:100%;height:100%;object-fit:cover;transition:transform .5s" style-hover="transform:scale(1.06)"/></div>
+                  <div style="aspect-ratio:3/2;overflow:hidden"><img loading="lazy" src="{{ e.img }}" alt="{{ e.name }}" style="width:100%;height:100%;object-fit:cover;transition:transform .5s" style-hover="transform:scale(1.06)"/></div>
                   <div style="padding:22px;display:flex;flex-direction:column;flex:1">
                     <h3 style="font-family:Anton;font-weight:400;font-size:28px;text-transform:uppercase;margin:0 0 4px">{{ e.name }}</h3>
                     <div style="font-family:Archivo;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#A50000;margin-bottom:10px">{{ e.capacity }}</div>
@@ -557,7 +549,7 @@ p,li{text-wrap:pretty}
             </div>
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px" class="cards-4">
               <sc-for list="{{ sec.shots }}" as="g" hint-placeholder-count="8">
-                <div data-reveal="off" style="aspect-ratio:1/1;overflow:hidden;border-radius:14px;border:2px solid #1A1411"><img src="{{ g.src }}" alt="" style="width:100%;height:100%;object-fit:cover;transition:transform .5s" style-hover="transform:scale(1.08)"/></div>
+                <div data-reveal="off" style="aspect-ratio:1/1;overflow:hidden;border-radius:14px;border:2px solid #1A1411"><img loading="lazy" src="{{ g.src }}" alt="" style="width:100%;height:100%;object-fit:cover;transition:transform .5s" style-hover="transform:scale(1.08)"/></div>
               </sc-for>
             </div>
           </div>
@@ -574,7 +566,7 @@ p,li{text-wrap:pretty}
             </div>
             <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px" class="strip-grid">
               <sc-for list="{{ sec.shots }}" as="g" hint-placeholder-count="6">
-                <div data-reveal="off" style="aspect-ratio:1/1;overflow:hidden;border-radius:14px;border:2px solid #1A1411;grid-column:span {{ g.span }}"><img src="{{ g.src }}" alt="{{ g.alt }}" style="width:100%;height:100%;object-fit:cover;transition:transform .5s" style-hover="transform:scale(1.07)"/></div>
+                <div data-reveal="off" style="aspect-ratio:1/1;overflow:hidden;border-radius:14px;border:2px solid #1A1411;grid-column:span {{ g.span }}"><img loading="lazy" src="{{ g.src }}" alt="{{ g.alt }}" style="width:100%;height:100%;object-fit:cover;transition:transform .5s" style-hover="transform:scale(1.07)"/></div>
               </sc-for>
             </div>
           </div>
@@ -652,8 +644,8 @@ p,li{text-wrap:pretty}
         <section style="padding:90px 24px;background:#FBF6EC">
           <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center" class="hero-grid">
             <div style="position:relative" data-reveal="off">
-              <div style="border-radius:20px;overflow:hidden;border:3px solid #1A1411;box-shadow:0 26px 54px -28px rgba(60,30,10,.5);aspect-ratio:4/3"><img src="{{ sec.img }}" alt="" style="width:100%;height:100%;object-fit:cover"/></div>
-              <div style="position:absolute;top:-22px;left:-18px;width:120px;height:120px;border-radius:50%;background:#A50000;color:#FFFCF8;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-10deg);border:2px dashed rgba(255,252,248,.7)"><span style="font-family:Anton;font-size:34px;line-height:.9">$40</span><span style="font-family:Archivo;font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase">2 for</span></div>
+              <div style="border-radius:20px;overflow:hidden;border:3px solid #1A1411;box-shadow:0 26px 54px -28px rgba(60,30,10,.5);aspect-ratio:4/3"><img loading="lazy" src="{{ sec.img }}" alt="" style="width:100%;height:100%;object-fit:cover"/></div>
+              <div style="position:absolute;top:-22px;left:-18px;width:120px;height:120px;border-radius:50%;background:#A50000;color:#FFFCF8;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-10deg);border:2px dashed rgba(255,252,248,.7)"><span style="font-family:Anton;font-size:34px;line-height:.9">$49</span><span style="font-family:Archivo;font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase">2 for</span></div>
             </div>
             <div data-reveal="off">
               <div style="font-family:Archivo;font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#A50000;margin-bottom:12px">{{ sec.eyebrow }}</div>
@@ -691,7 +683,7 @@ p,li{text-wrap:pretty}
                 </sc-for>
               </div>
             </div>
-            <div style="padding:0 8px;text-align:center;align-self:stretch;position:relative;z-index:2" class="app-graphic-cell" data-reveal="off"><img src="{{ sec.img }}" alt="Download the Mangia app" style="width:auto;height:calc(100% + 56px);max-width:92%;margin:-28px auto;display:block;filter:drop-shadow(0 26px 44px rgba(0,0,0,.45))"/></div>
+            <div style="padding:0 8px;text-align:center;align-self:stretch;position:relative;z-index:2" class="app-graphic-cell" data-reveal="off"><img loading="lazy" src="{{ sec.img }}" alt="Download the Mangia app" style="width:auto;height:calc(100% + 56px);max-width:92%;margin:-28px auto;display:block;filter:drop-shadow(0 26px 44px rgba(0,0,0,.45))"/></div>
           </div>
         </section>
       </sc-if>
@@ -927,7 +919,7 @@ p,li{text-wrap:pretty}
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" class="cards-3">
               <sc-for list="{{ sec.items }}" as="o" hint-placeholder-count="3">
                 <div data-reveal="off" style="position:relative;border:2px solid #1A1411;border-radius:20px;overflow:hidden;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;color:#FFFCF8;box-shadow:0 18px 40px -26px rgba(60,30,10,.5)">
-                  <img src="{{ o.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+                  <img loading="lazy" src="{{ o.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
                   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,12,.1),rgba(20,16,12,.86))"></div>
                   <div style="position:relative;padding:24px">
                     <span style="display:inline-block;background:#A50000;font-family:Archivo;font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:999px;margin-bottom:12px">{{ o.loc }}</span>
@@ -1074,8 +1066,7 @@ class Component extends DCLogic {
   /* ---- Interior hero slider images per location (update paths to change slides) ---- */
   HERO_SLIDES(){
     if(this.state.page==='loc-shrewsbury') return [
-      {src:'assets/shrews/int-dining.jpg', alt:'Mangia Shrewsbury dining room'},
-      {src:'assets/shrews/int-utensils.jpg', alt:'Fork and spoon wall art at Mangia Shrewsbury'},
+      {src:'assets/shrews/int-mural-2026.jpg', alt:'Guests dining under the Mangia mural in Shrewsbury'},
       {src:'assets/shrews/int-guests.jpg', alt:'Guests sharing pizza at Mangia Shrewsbury'}
     ];
     if(this.state.page==='loc-tomsriver') return [
@@ -1109,7 +1100,7 @@ class Component extends DCLogic {
       hoursShort:'Open daily from 11 AM',
       order:'https://mangiabrickovenpizza.hungerrush.com/',
       slice:'https://slicelife.com/restaurants/nj/toms-river/08753/mangia-brick-oven-pizza-toms-river/menu',
-      promo:'2 for $40 Offer', promoKey:'offer-tomsriver', capacity:'Up to 30 guests',
+      promo:'2 for $49 Offer', promoKey:'offer-tomsriver', capacity:'Up to 30 guests',
       socials:[ {type:'ig',label:'Instagram',href:'https://www.instagram.com/mangia.nj/'}, {type:'fb',label:'Facebook',href:'https://www.facebook.com/MangiaBrickOvenPizza/'}, {type:'ta',label:'TripAdvisor',href:'https://www.tripadvisor.com/Restaurant_Review-g46870-d5074986-Reviews-Mangia_Brick_Oven_Pizza-Toms_River_New_Jersey.html'} ],
       img:'assets/loc/toms-neon-pizza-me.jpg', objPos:'center' },
     { key:'jackson', name:'Jackson', region:'Jackson, NJ',
@@ -1117,7 +1108,7 @@ class Component extends DCLogic {
       hours:[['Mon – Fri','11:00 AM – 10:00 PM'],['Sat – Sun','11:00 AM – 10:00 PM']],
       hoursShort:'Open daily until 10 PM',
       order:'https://mangiabrickovenpizza.hungerrush.com/',
-      promo:'2 for $40 Offer', promoKey:'offer-jackson', capacity:'Up to 75 guests', perPerson:'$45.95 per person',
+      promo:'2 for $49 Offer', promoKey:'offer-jackson', capacity:'Up to 75 guests', perPerson:'$45.95 per person',
       socials:[ {type:'ig',label:'Instagram',href:'https://www.instagram.com/mangia.nj/'}, {type:'fb',label:'Facebook',href:'https://www.facebook.com/mangiajackson'}, {type:'ta',label:'TripAdvisor',href:'https://www.tripadvisor.com/Restaurant_Review-g46528-d7647207-Reviews-Mangia_Brick_Oven_Pizza-Jackson_New_Jersey.html'} ],
       img:'assets/loc/jackson-counter.jpg', objPos:'center 28%' },
     { key:'shrewsbury', name:'Shrewsbury', region:'Shrewsbury, NJ',
@@ -1126,16 +1117,16 @@ class Component extends DCLogic {
       hoursShort:'Open daily until 9–10 PM',
       order:'https://mangiabrickovenpizza.hungerrush.com/Order/OrderType',
       slice:'https://slicelife.com/restaurants/nj/shrewsbury/07702/mangia-brick-oven-pizza-shrewsbury/menu',
-      promo:'Download the App', promoKey:'app', capacity:'Up to 30 guests',
+      promo:'2 for $49 Offer', promoKey:'offer-shrewsbury', capacity:'Up to 30 guests',
       socials:[ {type:'fb',label:'Facebook',href:'https://www.facebook.com/mangiashrewsbury/'}, {type:'ig',label:'Instagram',href:'https://www.instagram.com/mangia.nj/'} ],
       img:'assets/loc/shrewsbury-room-v2.jpg', objPos:'center' }
   ]; }
 
   /* ---- MENU FILES per location (swap PDFs here) ---- */
   MENUS(){ return {
-    shrewsbury:[ {label:'Dinner Menu', file:'assets/menus/shrews-dinner.pdf'}, {label:'Take Out Menu', file:'assets/menus/shrews-takeout.pdf'}, {label:'Mix and Match Catering Menu', file:'assets/menus/shrews-catering-sep2026.pdf'} ],
-    tomsriver:[ {label:'Dining Menu', file:'assets/menus/toms-dining.pdf'}, {label:'Take Out Menu', file:'assets/menus/toms-takeout-v9.pdf'}, {label:'Full Catering Menu', file:'assets/menus/toms-catering.pdf'}, {label:'Mix and Match Catering Menu', file:'assets/menus/toms-catering-aug2026.pdf'} ],
-    jackson:[ {label:'Dining Menu', file:'assets/menus/jackson-dining.pdf'}, {label:'Take Out Menu', file:'assets/menus/jackson-takeout-sep2026.pdf'}, {label:'Full Catering Menu', file:'assets/menus/jackson-catering-2026.pdf'}, {label:'Mix and Match Catering Menu', file:'assets/menus/jackson-catering-aug2026.pdf'}, {label:'Party Package', file:'assets/menus/jackson-party.pdf'} ]
+    shrewsbury:[ {label:'2 for $49 Menu', file:'assets/menus/2-for-49.png'}, {label:'Dinner Menu', file:'assets/menus/shrews-dinner.pdf'}, {label:'Take Out Menu', file:'assets/menus/shrews-takeout.pdf'}, {label:'Mix and Match Catering Menu', file:'assets/menus/shrews-catering-sep2026.pdf'} ],
+    tomsriver:[ {label:'2 for $49 Menu', file:'assets/menus/2-for-49.png'}, {label:'Dining Menu', file:'assets/menus/toms-dining.pdf'}, {label:'Take Out Menu', file:'assets/menus/toms-takeout-sep2026.pdf'}, {label:'Full Catering Menu', file:'assets/menus/toms-catering.pdf'}, {label:'Mix and Match Catering Menu', file:'assets/menus/toms-catering-aug2026.pdf'} ],
+    jackson:[ {label:'2 for $49 Menu', file:'assets/menus/2-for-49.png'}, {label:'Dining Menu', file:'assets/menus/jackson-dining.pdf'}, {label:'Take Out Menu', file:'assets/menus/jackson-takeout-sep2026.pdf'}, {label:'Full Catering Menu', file:'assets/menus/jackson-catering-2026.pdf'}, {label:'Mix and Match Catering Menu', file:'assets/menus/jackson-catering-aug2026.pdf'}, {label:'Party Package', file:'assets/menus/jackson-party.pdf'} ]
   }; }
 
   /* ---- TESTIMONIALS (from current site) ---- */
@@ -1190,13 +1181,13 @@ class Component extends DCLogic {
     {q:'Do you offer delivery?', a:'Yes, delivery is available through our online ordering for participating locations.'},
     {q:'How do I apply for a job?', a:'Head to our Careers page and submit the application form. Choose your preferred location and the position you are interested in.'},
     {q:'How do I request a private event?', a:'Open the private events page for your location and fill out the event request form. We will follow up to confirm details.'},
-    {q:'How do I get the 2 for $40 offer?', a:'The 2 for $40 dinner-for-two offer is a dine-in special available Monday through Thursday at Toms River and Jackson. There\u2019s nothing to claim and it\u2019s not a coupon \u2014 just visit the restaurant Monday through Thursday and ask your server. It is not available for takeout, delivery or online orders.'}
+    {q:'How do I get the 2 for $49 offer?', a:'The 2 for $49 dinner-for-two offer is a dine-in special available Monday through Thursday, 4:30–8:30 PM, at Toms River, Jackson and Shrewsbury. There\u2019s nothing to claim and it\u2019s not a coupon \u2014 just visit the restaurant Monday through Thursday, 4:30–8:30 PM and ask your server. It is not available for takeout, delivery or online orders.'}
   ]; }
 
   /* =====================================================================
      STATE / ROUTING
      ===================================================================== */
-  pageList(){ return ['home','locations','loc-shrewsbury','loc-tomsriver','loc-jackson','menus','events','events-shrewsbury','events-tomsriver','events-jackson','catering','catering-shrewsbury','catering-tomsriver','catering-jackson','testimonials','careers','contact','contact-shrewsbury','contact-tomsriver','contact-jackson','offer-tomsriver','offer-jackson','thankyou','apply','thankyou-app']; }
+  pageList(){ return ['home','locations','loc-shrewsbury','loc-tomsriver','loc-jackson','menus','events','events-shrewsbury','events-tomsriver','events-jackson','catering','catering-shrewsbury','catering-tomsriver','catering-jackson','testimonials','careers','contact','contact-shrewsbury','contact-tomsriver','contact-jackson','offer-tomsriver','offer-jackson','offer-shrewsbury','thankyou','apply','thankyou-app']; }
 
   componentDidMount(){
     // Clean URLs (/toms-river) only on the real domain; in the Claude preview
@@ -1243,7 +1234,7 @@ class Component extends DCLogic {
     'events-shrewsbury':'private-events-shrewsbury', 'events-tomsriver':'private-events-toms-river', 'events-jackson':'private-events-jackson',
     'catering-shrewsbury':'catering-shrewsbury', 'catering-tomsriver':'catering-toms-river', 'catering-jackson':'catering-jackson',
     'contact-shrewsbury':'contact-shrewsbury', 'contact-tomsriver':'contact-toms-river', 'contact-jackson':'contact-jackson',
-    'offer-tomsriver':'2-for-40-toms-river', 'offer-jackson':'2-for-40-jackson'
+    'offer-tomsriver':'2-for-49-toms-river', 'offer-jackson':'2-for-49-jackson', 'offer-shrewsbury':'2-for-49-shrewsbury'
   }; }
   slugFor(page){ const m=this.SLUGS(); return (page in m)? m[page] : ''; }
   pageFromSlug(slug){
@@ -1275,7 +1266,7 @@ class Component extends DCLogic {
     else if(page.indexOf('events-')===0){ const l=this.locByKey(page.slice(7)); if(l){ t='Private Events in '+l.name+', NJ'; d='Host your private party at Mangia '+l.name+', NJ. '+l.capacity+' \u2014 birthdays, showers, corporate events, holidays and more.'; } }
     else if(page.indexOf('catering-')===0){ const l=this.locByKey(page.slice(9)); if(l){ t='Catering in '+l.name+', NJ'; d='Pizza and Italian catering from Mangia '+l.name+', NJ. Trays, party packages and crowd-pleasers for offices, parties and gatherings.'; } }
     else if(page.indexOf('contact-')===0){ const l=this.locByKey(page.slice(8)); if(l){ t='Contact Mangia '+l.name+', NJ'; d='Contact Mangia Brick Oven Pizza in '+l.name+', NJ \u2014 '+l.address+' \u00b7 '+l.phone+'.'; } }
-    else if(page.indexOf('offer-')===0){ const l=this.locByKey(page.slice(6)); if(l){ t='2 for $40 Dine-In Special in '+l.name+', NJ'; d='Enjoy a four-course dinner for two for just $40 at Mangia '+l.name+', NJ \u2014 dine-in only, Monday through Thursday.'; } }
+    else if(page.indexOf('offer-')===0){ const l=this.locByKey(page.slice(6)); if(l){ t='2 for $49 Dine-In Special in '+l.name+', NJ'; d='Enjoy a four-course dinner for two for just $49 at Mangia '+l.name+', NJ \u2014 dine-in only, Monday through Thursday, 4:30–8:30 PM.'; } }
     if(!t){ t=base.home.t; d=base.home.d; }
     const hasBrand = t.indexOf('Mangia Brick Oven Pizza')!==-1;
     const title = (page==='home') ? (brand+' | '+t) : (hasBrand ? t : (t+' | '+brand));
@@ -1345,8 +1336,9 @@ class Component extends DCLogic {
   openOrder(){ this.setState({orderOpen:true, menuOpen:false}); }
   closeOrder(){ this.setState({orderOpen:false}); }
   openPdf(file,title){
-    // Live site: open the PDF directly in a new tab (native viewer = crisp pinch/scroll zoom).
-    if(this.cleanUrls()){ var abs=new URL(file, location.origin+'/').href; var w=window.open(abs,'_blank','noopener'); if(w||true){ this.setState({menuOpen:false}); return; } }
+    this.setState({menuOpen:false});
+    window.open(new URL(file, document.baseURI).href, '_blank', 'noopener');
+    return;
     this.setState({menuOpen:false, pdf:{open:true,loading:true,url:'',title:title||'Menu',error:false}});
     var self=this;
     fetch(file).then(function(r){ if(!r.ok) throw new Error(r.status); return r.blob(); }).then(function(b){
@@ -1420,7 +1412,7 @@ class Component extends DCLogic {
     const locMap={'Jackson':'jackson','Toms River':'tomsriver','Shrewsbury':'shrewsbury'};
     const pl=(fields.find(f=>/preferred location/i.test(f[0]))||[])[1];
     return EM[locMap[pl]]||''; }
-  formSubject(id){ if(id.indexOf('contact-')===0) return 'Website Contact Form'; if(id.indexOf('events-')===0) return 'Private Event Request'; if(id.indexOf('offer-')===0) return '2 for $40 Offer Request'; if(id==='careers') return 'Careers Application'; if(id.indexOf('catering')===0) return 'Catering Request'; return 'Website Form Submission'; }
+  formSubject(id){ if(id.indexOf('contact-')===0) return 'Website Contact Form'; if(id.indexOf('events-')===0) return 'Private Event Request'; if(id.indexOf('offer-')===0) return '2 for $49 Offer Request'; if(id==='careers') return 'Careers Application'; if(id.indexOf('catering')===0) return 'Catering Request'; return 'Website Form Submission'; }
   locLabelForKey(key){ const EM=this.FORM_EMAILS(); if(!EM[key]) return ''; const lc=this.locByKey?this.locByKey(key):null; return lc?lc.name:key; }
   wrapLine(s,max){ max=max||95; s=String(s); const words=s.split(' '); const out=[]; let cur='';
     words.forEach(w=>{ if((cur+' '+w).trim().length>max){ if(cur) out.push(cur); cur=w; } else { cur=(cur?cur+' ':'')+w; } });
@@ -1671,9 +1663,9 @@ class Component extends DCLogic {
   pgHome(){
     const L=this.LOCATIONS();
     const offers=[
-      {loc:'Toms River', label:'2 for $40', desc:'A four-course dinner for two for $40 — dine-in only, Monday through Thursday.', img:'assets/toms/offer-2for40.jpg', ctas:[this.mkCta('See The Offer','light',{go:'offer-tomsriver'})]},
-      {loc:'Jackson', label:'2 for $40', desc:'A four-course dinner for two for $40 — dine-in only, Monday through Thursday.', img:'assets/home/food-56.jpg', ctas:[this.mkCta('See The Offer','light',{go:'offer-jackson'})]},
-      {loc:'Shrewsbury', label:'Download Our App', desc:'Order fresh Mangia anytime, right from your phone.', img:'assets/home/owners-counter.jpg', ctas:[this.mkCta('Get The App','light',{href:'http://apple.co/2ZWtbws'})]}
+      {loc:'Toms River', label:'2 for $49', desc:'A four-course dinner for two for $49 — dine-in only, Monday through Thursday, 4:30–8:30 PM.', img:'assets/toms/offer-2for40.jpg', ctas:[this.mkCta('See The Offer','light',{go:'offer-tomsriver'})]},
+      {loc:'Jackson', label:'2 for $49', desc:'A four-course dinner for two for $49 — dine-in only, Monday through Thursday, 4:30–8:30 PM.', img:'assets/home/food-56.jpg', ctas:[this.mkCta('See The Offer','light',{go:'offer-jackson'})]},
+      {loc:'Shrewsbury', label:'2 for $49', desc:'A four-course dinner for two for $49 — dine-in only, Monday through Thursday, 4:30–8:30 PM.', img:'assets/home/owners-counter.jpg', ctas:[this.mkCta('See The Offer','light',{go:'offer-shrewsbury'})]}
     ];
     return [
       this.S('heroVideo',{ eyebrow:'Toms River · Jackson · Shrewsbury, NJ', kicker:"Good Pizza. Good People. That's Mangia.", line1:'NEW YORK', line2:'ATTITUDE',
@@ -1852,7 +1844,7 @@ class Component extends DCLogic {
     const aboutImg={shrewsbury:'assets/loc/shrews-team-1.jpg', tomsriver:'assets/toms/about-1.jpg', jackson:'assets/jackson/team-1.jpg'}[loc.key];
     const heroImg={shrewsbury:'assets/home/food-65.jpg', tomsriver:'assets/home/food-49.jpg', jackson:'assets/home/grandma-square.jpg'}[loc.key];
     const heroCtas=[ this.mkCta('Order Online','primary',{href:loc.order}), this.mkCta('Call Now','ghost',{tel:loc.tel}), this.mkCta('View Menus','ghost',{go:'loc-'+loc.key,anchor:'menus'}) ];
-    if(loc.promoKey && loc.promoKey.indexOf('offer')===0) heroCtas.push(this.mkCta('See 2 for $40 Deal','ghost',{go:loc.promoKey}));
+    if(loc.promoKey && loc.promoKey.indexOf('offer')===0) heroCtas.push(this.mkCta('See 2 for $49 Deal','ghost',{go:loc.promoKey}));
     const heroSub = loc.key==='shrewsbury'
       ? 'Fresh, specialty pizza in Shrewsbury, NJ at Mangia Brick Oven Pizza. Family-owned and serving delicious pizzas and entrees made from cherished recipes.'
       : 'Fresh, specialty pizza is here in '+loc.name+', NJ at Mangia Brick Oven Pizza. Our restaurant provides delicious pizza and entrees made from family recipes and served with love and care.';
@@ -1866,8 +1858,9 @@ class Component extends DCLogic {
     ];
     if(loc.key==='shrewsbury'){
       out.push(this.S('appPromo',{ anchor:'app', eyebrow:'Order Anytime', title:'Download The Mangia App', sub:'Order fresh Mangia anytime, skip the wait, and keep your favorites a tap away.', img:'assets/home/app-graphic.png', ctas:[ this.mkCta('Download App','light',{href:'http://apple.co/2ZWtbws'}), this.mkCta('Order Online','ghost',{href:loc.order}) ] }));
-    } else {
-      out.push(this.S('offerDetails',{ eyebrow:'Dine-In Only \u00b7 Mon\u2013Thu', title:'2 for $40 Offer', sub:'Enjoy a four-course dinner for two for just $40, dine-in at Mangia '+loc.name+'. It\u2019s our standing Monday-through-Thursday offering \u2014 not a coupon, and not available for takeout, delivery or online orders.', img:(loc.key==='jackson'?'assets/jackson/offer-chandeliers.jpg':'assets/toms/offer-2for40.jpg'), bullets:['Four courses for two, chosen from the menu','Dine-in only \u2014 enjoy it at the table','Available Monday through Thursday'], fine:'Dine-in only. Not a coupon. Not valid for takeout, delivery or online orders. Available Monday through Thursday at Mangia '+loc.name+'. See restaurant for full details.', ctas:[ this.mkCta('See Offer Details','primary',{go:loc.promoKey}), this.mkCta('View Menus','ghost',{go:'loc-'+loc.key,anchor:'menus'}) ] }));
+    }
+    {
+      out.push(this.S('offerDetails',{ eyebrow:'Dine-In Only \u00b7 Mon\u2013Thu 4:30\u20138:30 PM', title:'2 for $49 Offer', sub:'Enjoy a four-course dinner for two for just $49, dine-in at Mangia '+loc.name+'. It\u2019s our standing Monday-through-Thursday, 4:30–8:30 PM offering \u2014 not a coupon, and not available for takeout, delivery or online orders.', img:(loc.key==='jackson'?'assets/jackson/offer-chandeliers.jpg':(loc.key==='shrewsbury'?'assets/shrews/food-spread.jpg':'assets/toms/offer-2for40.jpg')), bullets:['Four courses for two, chosen from the menu','Dine-in only \u2014 enjoy it at the table','Available Monday through Thursday, 4:30–8:30 PM'], fine:'Dine-in only. Not a coupon. Not valid for takeout, delivery or online orders. Available Monday through Thursday, 4:30–8:30 PM, at Mangia '+loc.name+'. See restaurant for full details.', ctas:[ this.mkCta('See Offer Details','primary',{go:loc.promoKey}), this.mkCta('View Menus','ghost',{go:'loc-'+loc.key,anchor:'menus'}) ] }));
     }
     if(loc.key==='jackson'){
       out.push(this.S('photoStrip',{ bg:'#FBF6EC', eyebrow:'A Taste Of Jackson', title:'Fresh From Our Kitchen', shots:[
@@ -1935,9 +1928,9 @@ class Component extends DCLogic {
     const offerImg = loc.key==='tomsriver' ? 'assets/toms/offer-2for40.jpg' : 'assets/home/food-58.jpg';
     const heroImg = loc.key==='tomsriver' ? 'assets/toms/offer-2for40.jpg' : 'assets/home/food-56.jpg';
     return [
-      this.S('heroImage',{ eyebrow:'Dine-In Special \u00b7 Mon\u2013Thu', title:'2 for $40 Offer', img:heroImg, sub:'A four-course dinner for two for just $40 \u2014 dine-in at Mangia Brick Oven Pizza in '+loc.name+', NJ, Monday through Thursday. Not a coupon and not available online \u2014 just join us at the table.', ctas:[ this.mkCta('View Menus','primary',{go:'loc-'+loc.key,anchor:'menus'}), this.mkCta('Visit '+loc.name,'light',{go:'loc-'+loc.key}) ] }),
-      this.S('offerDetails',{ eyebrow:'The Offering', title:'Dinner For Two, Just $40', sub:'Two people, four courses, one great price \u2014 made from family recipes and served right at your table. This is our standing dine-in offering, not a coupon, available Monday through Thursday at Mangia '+loc.name+'.', img:offerImg, bullets:['Four courses for two, chosen from the menu','Dine-in only \u2014 enjoy it at the table','Available Monday through Thursday'], fine:'Dine-in only. Not a coupon. Not valid for takeout, delivery or online orders. Available Monday through Thursday. See restaurant for full details.', ctas:[ this.mkCta('View Menus','primary',{go:'loc-'+loc.key,anchor:'menus'}), this.mkCta('Visit '+loc.name,'ghost',{go:'loc-'+loc.key}) ] }),
-      this.ctaPanel('Dinner For','Two Awaits','Join us for dinner at Mangia '+loc.name+', Monday through Thursday \u2014 dine-in only.', [ this.mkCta('Find Us','light',{go:'loc-'+loc.key}), this.mkCta('View Menus','ghost',{go:'loc-'+loc.key,anchor:'menus'}) ])
+      this.S('heroImage',{ eyebrow:'Dine-In Special \u00b7 Mon\u2013Thu 4:30\u20138:30 PM', title:'2 for $49 Offer', img:heroImg, sub:'A four-course dinner for two for just $49 \u2014 dine-in at Mangia Brick Oven Pizza in '+loc.name+', NJ, Monday through Thursday, 4:30–8:30 PM. Not a coupon and not available online \u2014 just join us at the table.', ctas:[ this.mkCta('View Menus','primary',{go:'loc-'+loc.key,anchor:'menus'}), this.mkCta('Visit '+loc.name,'light',{go:'loc-'+loc.key}) ] }),
+      this.S('offerDetails',{ eyebrow:'The Offering', title:'Dinner For Two, Just $49', sub:'Two people, four courses, one great price \u2014 made from family recipes and served right at your table. This is our standing dine-in offering, not a coupon, available Monday through Thursday, 4:30–8:30 PM, at Mangia '+loc.name+'.', img:offerImg, bullets:['Four courses for two, chosen from the menu','Dine-in only \u2014 enjoy it at the table','Available Monday through Thursday, 4:30–8:30 PM'], fine:'Dine-in only. Not a coupon. Not valid for takeout, delivery or online orders. Available Monday through Thursday, 4:30–8:30 PM. See restaurant for full details.', ctas:[ this.mkCta('View Menus','primary',{go:'loc-'+loc.key,anchor:'menus'}), this.mkCta('Visit '+loc.name,'ghost',{go:'loc-'+loc.key}) ] }),
+      this.ctaPanel('Dinner For','Two Awaits','Join us for dinner at Mangia '+loc.name+', Monday through Thursday, 4:30–8:30 PM \u2014 dine-in only.', [ this.mkCta('Find Us','light',{go:'loc-'+loc.key}), this.mkCta('View Menus','ghost',{go:'loc-'+loc.key,anchor:'menus'}) ])
     ];
   }
 
